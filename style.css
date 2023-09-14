@@ -68,3 +68,12 @@ tooltip label{
   border-radius: 0px 10px 10px 0px;
   margin-right: 10px;
 }
+
+
+#workspaces {
+  background: #FFFFFF;
+  margin: 5px 5px 5px 5px;
+  padding: 4px 1px;
+  border-radius: 12px;
+  opacity: 0.8;
+}

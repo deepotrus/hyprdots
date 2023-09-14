@@ -1,0 +1,7 @@
+#!/bin/sh
+
+wallpaper=$(find ~/pix/ -type f -iname "*.jpg" -o -name "*.png" | shuf -n 1)
+
+wal -c
+wal -i $wallpaper
+swww img $wallpaper --transition-step 30 --transition-fps 30
