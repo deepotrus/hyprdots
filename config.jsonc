@@ -1,7 +1,12 @@
 {
   "layer": "top",
+  "margin-top": 5, /* Distance from top of the monitor */
+  /*"margin-bottom": 0, Not important because layer is top*/
+  "margin-left": 10,
+  "margin-right": 10,
+  
   "position": "top",
-  "height": 50,
+  "spacing": 0, /* Distance between bubbles */
   
   "modules-left": [
     "cpu",
@@ -14,7 +19,7 @@
   ],
     
   "modules-right": [
-    "temperature", "pulseaudio", "clock"
+    "custom/bluetooth", "temperature", "pulseaudio", "clock"
   ],
 
 
@@ -59,6 +64,12 @@
   },
 
 //~~~~~~~~~~~~~~~~ RIGHT MODULES ----------------//
+  "custom/bluetooth":{
+    "exec": "~/.config/waybar/bluetooth.sh",
+    "on-click": "~/.config/waybar/toggle-bluetooth.sh",
+    "return-type": "json",
+    "interval": 1 //update every 0.2 seconds
+  },
   
   "temperature": {
     "thermal-zone": 1,
@@ -75,8 +86,13 @@
     "on-scroll-down": "pamixer -d 5",
     "scroll-step": 5,
     "format-icons": {
-      "headphone": "Headphones",
+      "headphone": "🎧",
       "default": ["󰕿","󰖀","󰕾"]
-    }
+    },
+  },
+  
+  "clock":{
+    "tooltip": true,
+    "tooltip-format": "{:  %A, %B %e %Y}"
   }
 }
