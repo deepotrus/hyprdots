@@ -1,0 +1,98 @@
+{
+  "layer": "top",
+  "margin-top": 5, /* Distance from top of the monitor */
+  /*"margin-bottom": 0, Not important because layer is top*/
+  "margin-left": 10,
+  "margin-right": 10,
+  
+  "position": "top",
+  "spacing": 0, /* Distance between bubbles */
+  
+  "modules-left": [
+    "cpu",
+    "memory",
+    "disk"
+  ],
+  
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+    
+  "modules-right": [
+    "custom/bluetooth", "temperature", "pulseaudio", "clock"
+  ],
+
+
+//~~~~~~~~~~~~~~~ LEFT MODULES ~~~~~~~~~~~~~~~~//
+
+  "cpu": {
+    "interval": 10,
+    "format": "󰻠 {usage}%",
+    "max-length": 10
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": " 󰋊 {percentage_used}%",
+    "path": "/",
+    "tooltip": true,
+    "tooltip-format": "HDD - {used}/{total}"
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": "󰍛 {}%",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": "Memory - {used:0.1f}GB used"
+  },
+
+//~~~~~~~~~~~~~~~~ CENTER MODULES ---------------//
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "activate-only": false,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons":{
+      "urget":"",
+      "active":"",
+      "default":""
+    },
+    "persistent-workspaces": {
+      "*":5
+    }
+  },
+
+//~~~~~~~~~~~~~~~~ RIGHT MODULES ----------------//
+  "custom/bluetooth":{
+    "exec": "~/.config/waybar/bluetooth.sh",
+    "on-click": "~/.config/waybar/toggle-bluetooth.sh",
+    "return-type": "json",
+    "interval": 1 //update every 0.2 seconds
+  },
+  
+  "temperature": {
+    "thermal-zone": 1,
+    "format": " {temperatureC}°C",
+    "critical-threshold": 70,
+    "format-critical": " {temperatureC}°C"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "on-click": "pamixer -t",
+    "on-scroll-up": "pamixer -i 5",
+    "on-scroll-down": "pamixer -d 5",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "🎧",
+      "default": ["󰕿","󰖀","󰕾"]
+    },
+  },
+  
+  "clock":{
+    "tooltip": true,
+    "tooltip-format": "{:  %A, %B %e %Y}"
+  }
+}
