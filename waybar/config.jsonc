@@ -19,7 +19,7 @@
   ],
     
   "modules-right": [
-    "custom/bluetooth", "temperature", "pulseaudio", "clock"
+    "custom/weather", "custom/bluetooth", "temperature", "pulseaudio", "clock"
   ],
 
 
@@ -64,11 +64,18 @@
   },
 
 //~~~~~~~~~~~~~~~~ RIGHT MODULES ----------------//
-  "custom/bluetooth":{
-    "exec": "~/.config/waybar/bluetooth.sh",
-    "on-click": "~/.config/waybar/toggle-bluetooth.sh",
+  "custom/weather": {
+    "exec": "~/.config/waybar/weather/weather.sh",
+    "on-click": "~/.config/waybar/weather/start.sh",
     "return-type": "json",
-    "interval": 1 //update every 0.2 seconds
+    "interval": 0.1 //update every 0.1 seconds
+  },
+
+  "custom/bluetooth":{
+    "exec": "~/.config/waybar/bluetooth/bluetooth.sh",
+    "on-click": "~/.config/waybar/bluetooth/toggle-bluetooth.sh",
+    "return-type": "json",
+    "interval": 0.1 //update every 0.1 seconds
   },
   
   "temperature": {

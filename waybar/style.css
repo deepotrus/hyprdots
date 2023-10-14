@@ -32,6 +32,7 @@ tooltip label{
 /* Customize bubbles containing waybar objects  */
 #hyprland-window,
 #custom-bluetooth,
+#custom-weather,
 #cpu,
 #disk,
 #clock,
@@ -79,5 +80,9 @@ tooltip label{
 }
 
 #custom-bluetooth {
+  margin-right: 10px;
+}
+
+#custom-weather {
   margin-right: 10px;
 }
