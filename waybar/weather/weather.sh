@@ -1,8 +1,8 @@
 #!/bin/bash
 city="Carmagnola"
 # Check Weather Status
-weather=$(curl -s wttr.in/$city | sed -n 's/.*\x1B\[0m\(.*\)/\1/p' | head -n 1 | sed 's/^[[:space:]]*//')
-temp=$(curl -s wttr.in/$city | sed -n '4p' | cut -c 54- | sed -r "s/\x1B\[[0-9;]*[A-Za-z]//g")
+weather=$(curl -s wttr.in/$city | sed -n '3p' | awk '{ for (i=1; i<=NF; i++) print $i }')
+temp=$(curl -s wttr.in/$city | sed -n '4p' | grep -oE '[+-]?[0-9]+' | tail -n 3 | head -n 1)
 
 case "$weather" in
   "Unavailable")
@@ -12,6 +12,10 @@ case "$weather" in
   "Sunny")
     echo "It's a sunny day."
     WEATHER_STATUS=""
+    ;;
+  "Clear")
+    echo "It's clear."
+    WEATHER_STATUS="󰖔"
     ;;
   "Cloudy")
     echo "It's a cloudy day."
@@ -25,6 +29,14 @@ case "$weather" in
     echo "It's partly cloudy."
     WEATHER_STATUS="󰖕"
     ;;
+  "Mist")
+    echo "It's misty"
+    WEATHER_STATUS="󰖑"
+    ;;
+  "Fog")
+    echo "It's foggy"
+    WEATHER_STATUS=""
+    ;;
 esac
 
-echo '{"text": "Weather: '$WEATHER_STATUS'","tooltip": "City: '$city'\nWeather: '$weather'\nTemp: '$temp'"}'
+echo '{"text": "Weather: '$WEATHER_STATUS'","tooltip": "City: '$city'\nWeather: '$weather'\nTemp: '$temp' °C"}'
