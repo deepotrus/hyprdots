@@ -1,7 +1,7 @@
 #!/bin/bash
 city="Carmagnola"
 # Check Weather Status
-weather=$(curl -s wttr.in/$city | sed -n '3p' | awk '{ for (i=1; i<=NF; i++) print $i }')
+weather=$(curl -s wttr.in/$city | sed -n '4s/\x1B\[[0-9;]*m//g; 3p' | sed 's/^[ \t]*//')
 temp=$(curl -s wttr.in/$city | sed -n '4p' | grep -oE '[+-]?[0-9]+' | tail -n 3 | head -n 1)
 
 case "$weather" in
@@ -21,7 +21,7 @@ case "$weather" in
     echo "It's a cloudy day."
     WEATHER_STATUS=""
     ;;
-  "Rainy")
+  "Rainy" | "Light rain")
     echo "It's a rainy day."
     WEATHER_STATUS="󰖗"
     ;;
@@ -29,13 +29,9 @@ case "$weather" in
     echo "It's partly cloudy."
     WEATHER_STATUS="󰖕"
     ;;
-  "Mist")
+  "Mist" | "Fog")
     echo "It's misty"
     WEATHER_STATUS="󰖑"
-    ;;
-  "Fog")
-    echo "It's foggy"
-    WEATHER_STATUS=""
     ;;
 esac
 
